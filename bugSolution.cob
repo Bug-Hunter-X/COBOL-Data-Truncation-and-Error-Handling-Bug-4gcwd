@@ -1,0 +1,24 @@
+WORKING-STORAGE SECTION.
+01 WS-INPUT-DATA PIC X(50).
+01 WS-OUTPUT-DATA PIC X(50).
+01 WS-LENGTH PIC 9(2) COMP.
+
+PROCEDURE DIVISION.
+    DISPLAY "Enter input data (50 chars max): ".
+    ACCEPT WS-INPUT-DATA.
+
+    INSPECT WS-INPUT-DATA TALLYING WS-LENGTH FOR CHARACTERS.
+
+    IF WS-LENGTH > 50 THEN 
+        DISPLAY "Error: Input exceeds maximum length." 
+        STOP RUN
+    END-IF.
+
+    IF WS-INPUT-DATA = SPACES THEN
+        DISPLAY "Error: Input data is blank." 
+        STOP RUN 
+    END-IF.
+
+    MOVE WS-INPUT-DATA TO WS-OUTPUT-DATA.
+    DISPLAY "Output data:" WS-OUTPUT-DATA.
+    STOP RUN.
